@@ -23,8 +23,36 @@ HashTable.prototype.hash = function(key){
   return bucket;
 }
 
+// INSERT
+HashTable.prototype.insert = function(key, value){
+  // Hash the key to figure out which bucket to put the new node in
+  let index = this.hash(key);
+
+  // Shows which bucket the node is in
+  console.log("Index", index)
+
+  // If nothing is in the bucket at the given index, put something there
+  if (!this.buckets[index]){
+    this.buckets[index] = new HashNode(key, value)
+  }
+  // If there is something, travel down the chain to find a spot to place it
+  else{
+    let currentNode = this.buckets[index];
+
+    while(currentNode.next){
+      currentNode = currentNode.next;
+    }
+    // Adds node to chain
+    currentNode.next = new HashNode(key, value);
+  }
+}
+
 const myHT = new HashTable(30);
 
 console.log(myHT.hash("Becca"))
-console.log(myHT)
+
+myHT.insert("Dean", "dean@gmail.com")
+myHT.insert("Megan", "megan@gmail.com")
+myHT.insert("Dane", "dane@yahoo.com")
+console.log(myHT.buckets)
 
