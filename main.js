@@ -9,7 +9,22 @@ function HashNode(key, value, next){
   this.next = next || null;
 }
 
+// HASH VALUES
+HashTable.prototype.hash = function(key){
+  let total = 0;
+
+  for (let i = 0; i < key.length; i++){
+    total += key.charCodeAt(i);
+  }
+
+  // Handles if total is greater than buckets
+  const bucket = total % this.numBuckets;
+
+  return bucket;
+}
+
 const myHT = new HashTable(30);
+
+console.log(myHT.hash("Becca"))
 console.log(myHT)
 
-console.log("hello world".charCodeAt(4))
