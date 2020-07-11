@@ -28,8 +28,8 @@ HashTable.prototype.insert = function(key, value){
   // Hash the key to figure out which bucket to put the new node in
   let index = this.hash(key);
 
-  // Shows which bucket the node is in
-  console.log("Index:", index)
+  // // Shows which bucket the node is in
+  // console.log("Index:", index)
 
   // If nothing is in the bucket at the given index, put something there
   if (!this.buckets[index]){
@@ -59,6 +59,31 @@ HashTable.prototype.insert = function(key, value){
   }
 }
 
+
+// GET
+HashTable.prototype.get = function(key){
+  let index = this.hash(key)
+
+  if(!this.buckets[index]){
+    return null;
+  }
+  else{
+    let currentNode = this.buckets[index]
+
+    while(currentNode){
+      if (currentNode.key === key){
+        return currentNode.value;
+      }
+
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
+}
+
+
+
 const myHT = new HashTable(30);
 
 //console.log(myHT.hash("Becca"))
@@ -71,6 +96,6 @@ myHT.insert("Megan", "megan-smith@gmail.com")
 myHT.insert("Dane", "dane1010@outlook.com")
 
 
-
-console.log(myHT.buckets)
+myHT.get("Megan")
+//console.log(myHT.buckets)
 
