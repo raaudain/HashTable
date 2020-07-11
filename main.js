@@ -83,6 +83,22 @@ HashTable.prototype.get = function(key){
 }
 
 
+// RETRIEVE ALL
+HashTable.prototype.retrieveAll = function(){
+  const all = []
+
+  for (let i = 0; i < this.numBuckets; i++){
+
+    let currentNode = this.buckets[i];
+
+    while(currentNode){
+      all.push(currentNode)
+      currentNode = currentNode.next
+    }
+  }
+
+  return all;
+}
 
 const myHT = new HashTable(30);
 
@@ -94,8 +110,9 @@ myHT.insert("Dane", "dane@yahoo.com")
 myHT.insert("Dean", "deanmachine@gmail.com")
 myHT.insert("Megan", "megan-smith@gmail.com")
 myHT.insert("Dane", "dane1010@outlook.com")
+myHT.insert("Ramon", "ramon@ramon.com")
 
-
-myHT.get("Megan")
+myHT.retrieveAll()
+//myHT.get("Megan")
 //console.log(myHT.buckets)
 
